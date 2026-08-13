@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { Calendar, Tag, FileText, CheckCircle2 } from 'lucide-react';
+import { useParams } from 'react-router-dom';
+import { SEO } from '../components/SEO';
+import { Calendar, Tag, FileText, CheckCircle2, ChevronRight, ChevronLeft } from 'lucide-react';
 
 export const NewsPage = () => {
-  const { lang, t } = useLanguage();
+  const { lang, t, navigate } = useLanguage();
+  const { id } = useParams();
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const isRtl = lang === 'ar';
+  const ChevronIcon = isRtl ? ChevronLeft : ChevronRight;
 
   const categories = [
     { id: 'all', label: lang === 'ar' ? 'جميع الأخبار والفعاليات' : 'All Updates' },
@@ -24,8 +29,34 @@ export const NewsPage = () => {
         (selectedCategory === 'IAEA Partnership' && item.category === 'تعاون دولي')
       );
 
+  // Detail View
+  if (id) {
+    const item = t.newsPage.items.find(n => n.id === id) || t.newsPage.items[0];
+    return (
+      <div className="news-detail-page" style={{ padding: '4rem 0', minHeight: '60vh' }}>
+        <SEO title={item.title} description={item.desc} path={`/news/${id}`} />
+        <div className="container">
+          <button onClick={() => navigate('news')} className="btn btn-outline mb-4">
+            <ChevronIcon size={16} />
+            <span>{lang === 'ar' ? 'العودة للأخبار' : 'Back to News'}</span>
+          </button>
+          <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+              <span className="badge badge-amber">{item.category}</span>
+              <span style={{ color: 'var(--color-text-muted)' }}>{item.date}</span>
+            </div>
+            <h1 style={{ fontSize: '2.5rem', marginBottom: '2rem', color: 'var(--color-navy-dark)' }}>{item.title}</h1>
+            <p style={{ fontSize: '1.2rem', lineHeight: '1.8', color: 'var(--color-text-main)' }}>{item.desc}</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // List View
   return (
     <div className="news-page">
+      <SEO title={t.nav.news} description={t.newsPage.subtitle} path="/news" />
       <section className="page-header-banner">
         <div className="container">
           <span className="badge badge-amber mb-2">{lang === 'ar' ? 'التوثيق والسجل المؤرخ' : 'Official Archive'}</span>
@@ -52,7 +83,7 @@ export const NewsPage = () => {
           {/* News Items List */}
           <div className="news-list">
             {filteredItems.map((item, idx) => (
-              <article key={idx} className="news-entry-card">
+              <article key={idx} className="news-entry-card" onClick={() => navigate('news', item.id)} style={{ cursor: 'pointer' }}>
                 <div className="news-entry-sidebar">
                   <span className="entry-date">
                     <Calendar size={15} />
@@ -76,120 +107,7 @@ export const NewsPage = () => {
         </div>
       </section>
 
-      <style>{`
-        .page-header-banner {
-          background-color: var(--color-navy-dark);
-          color: #ffffff;
-          padding: 3.5rem 0;
-          border-bottom: 3px solid var(--color-amber);
-        }
-
-        .page-header-banner h1 {
-          color: #ffffff;
-          font-size: 2.2rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .category-filter-bar {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          flex-wrap: wrap;
-          margin-bottom: 2.5rem;
-        }
-
-        .filter-pill {
-          background-color: var(--color-surface-alt);
-          border: 1px solid var(--color-border);
-          color: var(--color-navy);
-          padding: 0.5rem 1.1rem;
-          font-size: 0.9rem;
-          font-weight: 500;
-          border-radius: 50px;
-          cursor: pointer;
-          transition: all var(--transition-fast);
-          font-family: inherit;
-        }
-
-        .filter-pill:hover {
-          border-color: var(--color-teal);
-          color: var(--color-teal);
-        }
-
-        .filter-pill.active {
-          background-color: var(--color-navy-dark);
-          color: #ffffff;
-          border-color: var(--color-navy-dark);
-        }
-
-        .news-list {
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-        }
-
-        .news-entry-card {
-          background-color: #ffffff;
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-sm);
-          padding: 1.5rem;
-          display: grid;
-          grid-template-columns: 220px 1fr;
-          gap: 1.5rem;
-          align-items: flex-start;
-          transition: border-color var(--transition-fast);
-        }
-
-        .news-entry-card:hover {
-          border-color: var(--color-teal);
-        }
-
-        .news-entry-sidebar {
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-          align-items: flex-start;
-        }
-
-        .entry-date {
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
-          font-size: 0.88rem;
-          color: var(--color-text-muted);
-          font-weight: 500;
-        }
-
-        .news-entry-content h3 {
-          font-size: 1.25rem;
-          margin-bottom: 0.75rem;
-          color: var(--color-navy-dark);
-          line-height: 1.4;
-        }
-
-        .news-entry-content p {
-          font-size: 0.95rem;
-          color: var(--color-text-muted);
-          line-height: 1.65;
-          margin-bottom: 1.25rem;
-        }
-
-        .entry-source-tag {
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
-          font-size: 0.8rem;
-          color: var(--color-teal-dark);
-          font-weight: 500;
-        }
-
-        @media (max-width: 768px) {
-          .news-entry-card {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-          }
-        }
-      `}</style>
+      
     </div>
   );
 };

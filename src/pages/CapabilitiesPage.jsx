@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { useParams } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 import { 
   Building2, 
   MapPin, 
@@ -15,7 +17,8 @@ import {
 } from 'lucide-react';
 
 export const CapabilitiesPage = () => {
-  const { lang, t, navigate, activeItem } = useLanguage();
+  const { lang, t, navigate } = useLanguage();
+  const { id: activeItem } = useParams();
   const [level3Open, setLevel3Open] = useState(false);
   const isRtl = lang === 'ar';
   const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
@@ -61,6 +64,11 @@ export const CapabilitiesPage = () => {
 
     return (
       <div className="capability-detail-page">
+        <SEO 
+          title={item.name} 
+          description={item.shortDesc} 
+          path={`/capabilities/${item.id}`} 
+        />
         {/* Full-width Hero Banner Bleed (480px desktop / 280px mobile) */}
         <div className="bleed-hero">
           <img src={media.hero} alt={item.name} className="bleed-hero-img" />
@@ -189,178 +197,7 @@ export const CapabilitiesPage = () => {
           </div>
         </section>
 
-        <style>{`
-          .bleed-hero {
-            position: relative;
-            height: 480px;
-            display: flex;
-            align-items: flex-end;
-            background-color: var(--color-navy-dark);
-            color: #ffffff;
-            overflow: hidden;
-          }
-
-          .bleed-hero-img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-          }
-
-          .bleed-hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.9) 100%);
-          }
-
-          .bleed-hero-content {
-            position: relative;
-            z-index: 2;
-            padding-bottom: 2.5rem;
-          }
-
-          .bleed-hero-content h1 {
-            color: #ffffff;
-            font-size: 2.3rem;
-            margin-bottom: 0.5rem;
-          }
-
-          .bleed-subtitle {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.05rem;
-            color: var(--color-text-on-dark-muted);
-          }
-
-          .cap-detail-grid {
-            display: grid;
-            grid-template-columns: 2.2fr 1fr;
-            gap: 3rem;
-          }
-
-          .level-block {
-            background-color: #ffffff;
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            padding: 2rem;
-            position: relative;
-          }
-
-          .level-tag {
-            display: inline-block;
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: var(--color-teal-dark);
-            background-color: var(--color-teal-light);
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            margin-bottom: 1rem;
-            font-family: var(--font-mono);
-          }
-
-          .lead-desc {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: var(--color-navy-dark);
-            font-weight: 500;
-            margin-bottom: 1rem;
-          }
-
-          .etrr1-dignity-box {
-            background-color: var(--color-amber-light);
-            border: 1px solid rgba(217, 146, 46, 0.3);
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-          }
-
-          .dignity-header {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-bottom: 0.6rem;
-          }
-
-          .dignity-header h4 {
-            font-size: 1.05rem;
-            margin-bottom: 0;
-            color: var(--color-navy-dark);
-          }
-
-          .level-3-content {
-            background-color: var(--color-surface-alt);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-            margin-top: 1rem;
-          }
-
-          .flex-between {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-          }
-
-          .sidebar-media-box {
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            border: 1px solid var(--color-border);
-            margin-bottom: 1.5rem;
-          }
-
-          .sidebar-supporting-img {
-            width: 100%;
-            height: 240px;
-            object-fit: cover;
-            display: block;
-          }
-
-          .sidebar-caption {
-            background-color: var(--color-navy);
-            color: var(--color-text-on-dark-muted);
-            padding: 0.5rem 0.85rem;
-            font-size: 0.8rem;
-            text-align: center;
-          }
-
-          .sidebar-info-card {
-            background-color: var(--color-surface-alt);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-          }
-
-          .sidebar-info-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-          }
-
-          .sidebar-info-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
-            font-size: 0.9rem;
-          }
-
-          .sidebar-info-list li {
-            display: flex;
-            flex-direction: column;
-            gap: 0.2rem;
-          }
-
-          @media (max-width: 900px) {
-            .bleed-hero {
-              height: 280px;
-            }
-            .cap-detail-grid {
-              grid-template-columns: 1fr;
-            }
-          }
-        `}</style>
+        
       </div>
     );
   }
@@ -368,6 +205,11 @@ export const CapabilitiesPage = () => {
   // All Capabilities List View
   return (
     <div className="capabilities-page">
+      <SEO 
+        title={t.capabilities.title} 
+        description={t.capabilities.subtitle} 
+        path="/capabilities" 
+      />
       <section className="page-header-banner">
         <div className="container">
           <span className="badge badge-amber mb-2">{lang === 'ar' ? 'البنية التحتية والمنشآت' : 'Infrastructure & Facilities'}</span>
@@ -410,121 +252,7 @@ export const CapabilitiesPage = () => {
         </div>
       </section>
 
-      <style>{`
-        .page-header-banner {
-          background-color: var(--color-navy-dark);
-          color: #ffffff;
-          padding: 3.5rem 0;
-          border-bottom: 3px solid var(--color-amber);
-        }
-
-        .page-header-banner h1 {
-          color: #ffffff;
-          font-size: 2.2rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .lead-subtitle {
-          font-size: 1.1rem;
-          color: var(--color-text-on-dark-muted);
-        }
-
-        .capabilities-list-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 2rem;
-        }
-
-        .capability-card {
-          background-color: #ffffff;
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-sm);
-          overflow: hidden;
-          cursor: pointer;
-          transition: all var(--transition-fast);
-          display: flex;
-          flex-direction: column;
-        }
-
-        .capability-card:hover {
-          border-color: var(--color-teal);
-        }
-
-        .card-media {
-          position: relative;
-          height: 200px;
-        }
-
-        .card-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .status-badge {
-          position: absolute;
-          top: 1rem;
-          right: 1rem;
-        }
-
-        [dir="ltr"] .status-badge {
-          right: auto;
-          left: 1rem;
-        }
-
-        .card-body {
-          padding: 1.5rem;
-          display: flex;
-          flex-direction: column;
-          flex-grow: 1;
-        }
-
-        .location-row {
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
-          font-size: 0.82rem;
-          color: var(--color-text-muted);
-          margin-bottom: 0.6rem;
-        }
-
-        .capability-card h3 {
-          font-size: 1.25rem;
-          margin-bottom: 0.5rem;
-          color: var(--color-navy-dark);
-        }
-
-        .capability-card p {
-          font-size: 0.9rem;
-          color: var(--color-text-muted);
-          line-height: 1.6;
-          margin-bottom: 1.5rem;
-          flex-grow: 1;
-        }
-
-        .card-footer-action {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          color: var(--color-teal);
-          font-weight: 600;
-          font-size: 0.88rem;
-          padding-top: 0.75rem;
-          border-top: 1px solid var(--color-border-subtle);
-        }
-
-        @media (max-width: 990px) {
-          .capabilities-list-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-
-        @media (max-width: 650px) {
-          .capabilities-list-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-      `}</style>
+      
     </div>
   );
 };

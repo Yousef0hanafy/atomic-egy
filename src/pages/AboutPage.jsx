@@ -2,21 +2,29 @@ import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { TrustStrip } from '../components/TrustStrip';
 import { 
+  Building2, 
+  Target, 
+  Eye, 
   History, 
-  Building, 
-  UserCheck, 
-  Layers, 
+  ShieldCheck, 
+  Users,
+  Award,
   CheckCircle2, 
   MapPin, 
-  FileText,
-  ShieldCheck
+  FileText
 } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export const AboutPage = () => {
   const { lang, t, navigate } = useLanguage();
 
   return (
     <div className="about-page">
+      <SEO 
+        title={t.nav.about} 
+        description={t.siteTagline} 
+        path="/about" 
+      />
       {/* Header Banner */}
       <section className="page-header-banner">
         <div className="container">
@@ -175,303 +183,7 @@ export const AboutPage = () => {
       {/* Trust Component */}
       <TrustStrip />
 
-      <style>{`
-        .page-header-banner {
-          background-color: var(--color-navy-dark);
-          color: #ffffff;
-          padding: 3.5rem 0;
-          border-bottom: 3px solid var(--color-amber);
-        }
-
-        .page-header-banner h1 {
-          color: #ffffff;
-          font-size: 2.2rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .lead-subtitle {
-          font-size: 1.1rem;
-          color: var(--color-text-on-dark-muted);
-        }
-
-        /* Ecosystem Disambiguation */
-        .ecosystem-section {
-          background-color: #ffffff;
-        }
-
-        .ecosystem-card {
-          background-color: var(--color-surface);
-          border-top: 3px solid var(--color-amber);
-          border-right: 1px solid var(--color-border);
-          border-left: 1px solid var(--color-border);
-          border-bottom: 1px solid var(--color-border);
-          border-radius: var(--radius-sm);
-          padding: 2.5rem;
-        }
-
-        .ecosystem-header {
-          display: flex;
-          align-items: flex-start;
-          gap: 1rem;
-          margin-bottom: 2rem;
-        }
-
-        .ecosystem-header h2 {
-          font-size: 1.4rem;
-          margin-bottom: 0.25rem;
-        }
-
-        .ecosystem-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1.5rem;
-        }
-
-        .eco-item {
-          background-color: #ffffff;
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-sm);
-          padding: 1.25rem;
-          position: relative;
-        }
-
-        .eco-item.eco-active {
-          border-color: var(--color-teal);
-          border-right: 3px solid var(--color-teal);
-        }
-
-        [dir="ltr"] .eco-item.eco-active {
-          border-right: 1px solid var(--color-teal);
-          border-left: 3px solid var(--color-teal);
-        }
-
-        .eco-code {
-          display: inline-block;
-          font-family: var(--font-mono);
-          font-weight: 700;
-          font-size: 0.85rem;
-          color: var(--color-navy-dark);
-          background-color: var(--color-surface-alt);
-          padding: 0.2rem 0.6rem;
-          border-radius: var(--radius-sm);
-          margin-bottom: 0.6rem;
-        }
-
-        .eco-item.eco-active .eco-code {
-          background-color: var(--color-teal);
-          color: #ffffff;
-        }
-
-        .eco-item h4 {
-          font-size: 1.05rem;
-          margin-bottom: 0.5rem;
-          color: var(--color-navy-dark);
-        }
-
-        .eco-item p {
-          font-size: 0.88rem;
-          color: var(--color-text-muted);
-          line-height: 1.6;
-        }
-
-        /* Mandate Grid */
-        .mandate-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 2.5rem;
-          align-items: center;
-        }
-
-        .mandate-body {
-          font-size: 1.05rem;
-          line-height: 1.75;
-          margin-bottom: 2rem;
-          color: var(--color-text-main);
-        }
-
-        .key-pillars {
-          display: flex;
-          flex-direction: column;
-          gap: 1.25rem;
-        }
-
-        .pillar {
-          display: flex;
-          align-items: flex-start;
-          gap: 0.85rem;
-        }
-
-        .pillar h4 {
-          font-size: 1rem;
-          margin-bottom: 0.2rem;
-        }
-
-        .pillar p {
-          font-size: 0.88rem;
-          color: var(--color-text-muted);
-        }
-
-        .mandate-media {
-          border-radius: var(--radius-md);
-          overflow: hidden;
-          box-shadow: var(--shadow-md);
-          border: 1px solid var(--color-border);
-        }
-
-        .historical-img {
-          width: 100%;
-          height: 340px;
-          object-fit: cover;
-          display: block;
-        }
-
-        .media-tag {
-          background-color: var(--color-navy);
-          color: var(--color-text-on-dark-muted);
-          padding: 0.6rem 1rem;
-          font-size: 0.82rem;
-          text-align: center;
-        }
-
-        /* Timeline */
-        .timeline-wrapper {
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-          max-width: 800px;
-          margin: 2.5rem auto 0 auto;
-        }
-
-        .timeline-item {
-          display: flex;
-          gap: 2rem;
-          align-items: flex-start;
-          background: #ffffff;
-          padding: 1.5rem;
-          border-radius: var(--radius-md);
-          border: 1px solid var(--color-border);
-        }
-
-        .timeline-year {
-          font-family: var(--font-mono);
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: var(--color-amber-dark);
-          min-width: 80px;
-        }
-
-        .era-tag {
-          display: inline-block;
-          font-weight: 600;
-          font-size: 0.95rem;
-          color: var(--color-navy-dark);
-          margin-bottom: 0.35rem;
-        }
-
-        .timeline-content p {
-          font-size: 0.92rem;
-          color: var(--color-text-muted);
-          line-height: 1.6;
-        }
-
-        /* Leadership */
-        .leadership-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
-          margin-top: 2.5rem;
-        }
-
-        .leader-card {
-          background-color: #ffffff;
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-md);
-          padding: 2rem;
-          text-align: center;
-        }
-
-        .leader-avatar {
-          width: 64px;
-          height: 64px;
-          border-radius: 50%;
-          background-color: var(--color-surface-alt);
-          color: var(--color-navy);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 auto 1.25rem auto;
-          border: 2px solid var(--color-amber);
-        }
-
-        .leader-card h3 {
-          font-size: 1.15rem;
-          margin-bottom: 0.25rem;
-          color: var(--color-navy-dark);
-        }
-
-        .leader-role {
-          display: block;
-          font-size: 0.85rem;
-          font-weight: 600;
-          color: var(--color-teal);
-          margin-bottom: 0.75rem;
-        }
-
-        .leader-note {
-          font-size: 0.88rem;
-          color: var(--color-text-muted);
-          line-height: 1.5;
-        }
-
-        /* Centers */
-        .centers-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1.5rem;
-          margin-top: 2.5rem;
-        }
-
-        .center-card {
-          background: #ffffff;
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-md);
-          padding: 1.75rem;
-        }
-
-        .center-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: 1rem;
-        }
-
-        .center-code {
-          font-family: var(--font-mono);
-          font-weight: 700;
-          font-size: 0.9rem;
-          color: var(--color-teal-dark);
-          background-color: var(--color-teal-light);
-          padding: 0.25rem 0.75rem;
-          border-radius: 50px;
-        }
-
-        .center-card h3 {
-          font-size: 1.15rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .center-card p {
-          font-size: 0.9rem;
-          color: var(--color-text-muted);
-          line-height: 1.6;
-        }
-
-        @media (max-width: 900px) {
-          .ecosystem-grid, .mandate-grid, .leadership-grid, .centers-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-      `}</style>
+      
     </div>
   );
 };

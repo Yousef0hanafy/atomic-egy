@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { SEO } from '../components/SEO';
 import { 
   BookOpen, 
   GraduationCap, 
@@ -15,6 +16,11 @@ export const ResearchTrainingPage = () => {
 
   return (
     <div className="research-training-page">
+      <SEO 
+        title={t.researchPage.title} 
+        description={t.researchPage.subtitle} 
+        path="/research" 
+      />
       <section className="page-header-banner">
         <div className="container">
           <span className="badge badge-amber mb-2">{lang === 'ar' ? 'البحث العلمي والتعليم' : 'R&D & Education'}</span>
@@ -138,190 +144,7 @@ export const ResearchTrainingPage = () => {
         </div>
       </section>
 
-      <style>{`
-        .page-header-banner {
-          background-color: var(--color-navy-dark);
-          color: #ffffff;
-          padding: 3.5rem 0;
-          border-bottom: 3px solid var(--color-amber);
-        }
-
-        .page-header-banner h1 {
-          color: #ffffff;
-          font-size: 2.2rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .domains-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
-          margin-top: 2.5rem;
-        }
-
-        .domain-card {
-          background-color: #ffffff;
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-sm);
-          padding: 1.5rem;
-          position: relative;
-        }
-
-        .domain-num {
-          font-family: var(--font-mono);
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: var(--color-teal);
-          margin-bottom: 0.75rem;
-        }
-
-        .domain-card h3 {
-          font-size: 1.1rem;
-          margin-bottom: 0.5rem;
-          color: var(--color-navy-dark);
-        }
-
-        .domain-card p {
-          font-size: 0.88rem;
-          color: var(--color-text-muted);
-          line-height: 1.6;
-        }
-
-        /* Journal Section */
-        .journal-section {
-          background-color: var(--color-surface-alt);
-        }
-
-        .journal-grid {
-          display: grid;
-          grid-template-columns: 1.8fr 1fr;
-          gap: 2.5rem;
-          align-items: center;
-        }
-
-        .journal-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.3rem 0.75rem;
-          background-color: transparent;
-          border: 1px solid var(--color-border);
-          border-radius: 2px;
-          font-size: 0.82rem;
-          font-weight: 600;
-          color: var(--color-navy-dark);
-          margin-bottom: 1rem;
-        }
-
-        .journal-desc {
-          font-size: 1.05rem;
-          line-height: 1.7;
-          margin-bottom: 1.5rem;
-        }
-
-        .journal-meta-facts {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-          margin-bottom: 1.5rem;
-          font-size: 0.92rem;
-        }
-
-        .journal-visual {
-          background-color: var(--color-navy-dark);
-          color: #ffffff;
-          border-radius: var(--radius-sm);
-          padding: 2.5rem 2rem;
-          text-align: center;
-          border-top: 3px solid var(--color-amber);
-        }
-
-        .journal-cover-box h3 {
-          color: #ffffff;
-          font-size: 1.8rem;
-          font-family: var(--font-mono);
-          margin-bottom: 0.75rem;
-        }
-
-        .journal-cover-box p {
-          font-size: 0.9rem;
-          color: var(--color-text-on-dark-muted);
-          line-height: 1.5;
-        }
-
-        /* Training Section */
-        .training-grid {
-          display: grid;
-          grid-template-columns: 1fr 1.2fr;
-          gap: 3rem;
-          align-items: center;
-        }
-
-        .training-media {
-          border-radius: var(--radius-md);
-          overflow: hidden;
-          box-shadow: var(--shadow-md);
-          border: 1px solid var(--color-border);
-        }
-
-        .training-img {
-          width: 100%;
-          height: 340px;
-          object-fit: cover;
-          display: block;
-        }
-
-        .training-caption {
-          background-color: var(--color-navy);
-          color: var(--color-text-on-dark-muted);
-          padding: 0.5rem 1rem;
-          font-size: 0.82rem;
-          text-align: center;
-        }
-
-        .training-desc {
-          font-size: 1.05rem;
-          line-height: 1.7;
-          margin-bottom: 1.75rem;
-        }
-
-        .training-highlights {
-          display: flex;
-          flex-direction: column;
-          gap: 1.25rem;
-        }
-
-        .th-item {
-          display: flex;
-          align-items: flex-start;
-          gap: 0.85rem;
-        }
-
-        .th-item h4 {
-          font-size: 1rem;
-          margin-bottom: 0.2rem;
-        }
-
-        .th-item p {
-          font-size: 0.88rem;
-          color: var(--color-text-muted);
-        }
-
-        @media (max-width: 900px) {
-          .domains-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-          .journal-grid, .training-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-
-        @media (max-width: 600px) {
-          .domains-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-      `}</style>
+      
     </div>
   );
 };

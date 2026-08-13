@@ -1,5 +1,7 @@
 import React from 'react';
-import { LanguageProvider, useLanguage } from './context/LanguageContext';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { LanguageProvider } from './context/LanguageContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
@@ -10,35 +12,42 @@ import { ResearchTrainingPage } from './pages/ResearchTrainingPage';
 import { NewsPage } from './pages/NewsPage';
 import { ContactPage } from './pages/ContactPage';
 
+// Simple 404 Component
+const NotFoundPage = () => (
+  <div style={{ padding: '5rem 0', textAlign: 'center', minHeight: '50vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+    <h1 style={{ fontSize: '4rem', color: 'var(--color-navy-dark)', marginBottom: '1rem' }}>404</h1>
+    <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)' }}>Page not found / الصفحة غير موجودة</p>
+    <a href="/" className="btn btn-primary" style={{ marginTop: '2rem' }}>
+      Return Home / العودة للرئيسية
+    </a>
+  </div>
+);
+
 const AppContent = () => {
-  const { currentRoute } = useLanguage();
-
-  const renderPage = () => {
-    switch (currentRoute) {
-      case 'home':
-        return <HomePage />;
-      case 'about':
-        return <AboutPage />;
-      case 'services':
-        return <ServicesPage />;
-      case 'capabilities':
-        return <CapabilitiesPage />;
-      case 'research':
-        return <ResearchTrainingPage />;
-      case 'news':
-        return <NewsPage />;
-      case 'contact':
-        return <ContactPage />;
-      default:
-        return <HomePage />;
-    }
-  };
-
   return (
     <div className="app-root">
       <Header />
       <main className="main-content">
-        {renderPage()}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/services/:id" element={<ServicesPage />} />
+          
+          <Route path="/capabilities" element={<CapabilitiesPage />} />
+          <Route path="/capabilities/:id" element={<CapabilitiesPage />} />
+          
+          <Route path="/research" element={<ResearchTrainingPage />} />
+          
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/news/:id" element={<NewsPage />} />
+          
+          <Route path="/contact" element={<ContactPage />} />
+          
+          {/* Catch-all 404 */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
       <Footer />
     </div>
@@ -47,8 +56,12 @@ const AppContent = () => {
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <AppContent />
-    </LanguageProvider>
+    <HelmetProvider>
+      <BrowserRouter>
+        <LanguageProvider>
+          <AppContent />
+        </LanguageProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }

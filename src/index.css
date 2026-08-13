@@ -65,7 +65,7 @@ body {
   color: var(--color-text-main);
   font-family: var(--font-arabic);
   font-size: 1.0625rem; /* 17px base for Arabic */
-  line-height: 1.85;
+  line-height: 1.65; /* Refined for better density */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -160,6 +160,7 @@ a:hover {
   transition: all var(--transition-fast);
   white-space: nowrap;
   font-family: inherit;
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-primary {
@@ -170,7 +171,8 @@ a:hover {
 .btn-primary:hover {
   background-color: var(--color-teal-dark);
   color: #ffffff;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .btn-amber {
@@ -181,6 +183,8 @@ a:hover {
 .btn-amber:hover {
   background-color: var(--color-amber-dark);
   color: #ffffff;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .btn-outline {
@@ -210,10 +214,10 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.25rem 0.75rem;
+  padding: 0.25rem 0.6rem;
   font-size: 0.8rem;
   font-weight: 600;
-  border-radius: 50px;
+  border-radius: var(--radius-md);
   background-color: var(--color-surface-alt);
   color: var(--color-navy);
   border: 1px solid var(--color-border);
@@ -279,4 +283,9 @@ a:hover {
   h2 { font-size: 1.5rem; }
   [dir="ltr"] h1 { font-size: 2rem; }
   [dir="ltr"] h2 { font-size: 1.6rem; }
+}
+
+.desktop-only { display: block; }
+@media (max-width: 1024px) {
+  .desktop-only { display: none !important; }
 }

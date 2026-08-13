@@ -1,0 +1,40 @@
+<?xml version="1.xml" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://eaea.gov.eg/</loc>
+    <priority>1.0</priority>
+    <changefreq>daily</changefreq>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eaea.gov.eg/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eaea.gov.eg/" />
+  </url>
+  <url>
+    <loc>https://eaea.gov.eg/about</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://eaea.gov.eg/services</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://eaea.gov.eg/capabilities</loc>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://eaea.gov.eg/research</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://eaea.gov.eg/news</loc>
+    <priority>0.8</priority>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://eaea.gov.eg/contact</loc>
+    <priority>0.7</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+</urlset>

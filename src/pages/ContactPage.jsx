@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { SEO } from '../components/SEO';
 import { 
   MapPin, 
   Phone, 
@@ -18,6 +19,11 @@ export const ContactPage = () => {
 
   return (
     <div className="contact-page">
+      <SEO 
+        title={t.nav.contact} 
+        description="تواصل مع هيئة الطاقة الذرية المصرية" 
+        path="/contact" 
+      />
       <section className="page-header-banner">
         <div className="container">
           <span className="badge badge-amber mb-2">{lang === 'ar' ? 'مسارات التواصل والخدمات' : 'Direct Service Channels'}</span>
@@ -135,156 +141,7 @@ export const ContactPage = () => {
         </div>
       </section>
 
-      <style>{`
-        .page-header-banner {
-          background-color: var(--color-navy-dark);
-          color: #ffffff;
-          padding: 3.5rem 0;
-          border-bottom: 3px solid var(--color-amber);
-        }
-
-        .page-header-banner h1 {
-          color: #ffffff;
-          font-size: 2.2rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .locations-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
-        }
-
-        .location-card {
-          background-color: #ffffff;
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-md);
-          padding: 1.75rem;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .hq-card {
-          border-color: var(--color-teal);
-          box-shadow: var(--shadow-sm);
-        }
-
-        .card-top-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: 1rem;
-        }
-
-        .location-card h3 {
-          font-size: 1.2rem;
-          margin-bottom: 0.75rem;
-          color: var(--color-navy-dark);
-        }
-
-        .location-address {
-          display: flex;
-          align-items: flex-start;
-          gap: 0.5rem;
-          font-size: 0.92rem;
-          color: var(--color-text-muted);
-          line-height: 1.6;
-          margin-bottom: 1.5rem;
-          flex-grow: 1;
-        }
-
-        .contact-details {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-          padding-top: 1rem;
-          border-top: 1px solid var(--color-border-subtle);
-          font-size: 0.88rem;
-        }
-
-        .detail-line {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          color: var(--color-navy);
-          font-weight: 500;
-        }
-
-        /* Pathways Box */
-        .pathways-box {
-          background-color: var(--color-surface-alt);
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-lg);
-          padding: 2.5rem;
-        }
-
-        .pathways-title {
-          font-size: 1.3rem;
-          color: var(--color-navy-dark);
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
-          margin-bottom: 2rem;
-        }
-
-        .pathways-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
-        }
-
-        .pathway-item {
-          background-color: #ffffff;
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-md);
-          padding: 1.5rem;
-        }
-
-        .pathway-item h4 {
-          font-size: 1.05rem;
-          margin-bottom: 0.5rem;
-          color: var(--color-navy-dark);
-        }
-
-        .pathway-item p {
-          font-size: 0.88rem;
-          color: var(--color-text-muted);
-          line-height: 1.6;
-          margin-bottom: 1rem;
-        }
-
-        .pathway-contact {
-          font-family: var(--font-mono);
-          font-weight: 600;
-          font-size: 0.85rem;
-          color: var(--color-teal-dark);
-          background-color: var(--color-teal-light);
-          padding: 0.35rem 0.75rem;
-          border-radius: var(--radius-sm);
-          display: inline-block;
-        }
-
-        /* Disclaimer */
-        .domain-disclaimer-box {
-          background-color: var(--color-amber-light);
-          border: 1px solid rgba(217, 146, 46, 0.3);
-          border-radius: var(--radius-md);
-          padding: 1.25rem 1.5rem;
-          display: flex;
-          align-items: flex-start;
-          gap: 0.85rem;
-          font-size: 0.92rem;
-          color: var(--color-navy-dark);
-        }
-
-        .mt-4 { margin-top: 2rem; }
-
-        @media (max-width: 900px) {
-          .locations-grid, .pathways-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-      `}</style>
+      
     </div>
   );
 };

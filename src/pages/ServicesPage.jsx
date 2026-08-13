@@ -1,5 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { useParams } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 import { 
   Activity, 
   Radio, 
@@ -18,7 +20,8 @@ import {
 } from 'lucide-react';
 
 export const ServicesPage = () => {
-  const { lang, t, navigate, activeItem } = useLanguage();
+  const { lang, t, navigate } = useLanguage();
+  const { id: activeItem } = useParams();
   const isRtl = lang === 'ar';
   const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
   const ChevronIcon = isRtl ? ChevronLeft : ChevronRight;
@@ -49,6 +52,11 @@ export const ServicesPage = () => {
 
     return (
       <div className="service-detail-page">
+        <SEO 
+          title={service.title} 
+          description={service.shortDesc} 
+          path={`/services/${service.id}`} 
+        />
         {/* Detail Hero Header */}
         <section className="detail-header-banner">
           <div className="container">
@@ -152,154 +160,7 @@ export const ServicesPage = () => {
           </div>
         </section>
 
-        <style>{`
-          .detail-header-banner {
-            background-color: var(--color-navy-dark);
-            color: #ffffff;
-            padding: 3rem 0;
-            border-bottom: 3px solid var(--color-amber);
-          }
-
-          .back-btn {
-            background: transparent;
-            border: none;
-            color: var(--color-text-on-dark-muted);
-            font-size: 0.88rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-family: inherit;
-          }
-
-          .back-btn:hover {
-            color: var(--color-amber);
-          }
-
-          .detail-title-flex {
-            display: flex;
-            align-items: flex-start;
-            gap: 1.25rem;
-          }
-
-          .service-icon-lg {
-            width: 60px;
-            height: 60px;
-            border-radius: var(--radius-md);
-            background-color: var(--color-teal-light);
-            color: var(--color-teal-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-          }
-
-          .detail-title-flex h1 {
-            color: #ffffff;
-            font-size: 2rem;
-            margin-bottom: 0.4rem;
-          }
-
-          .detail-layout-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-          }
-
-          .q-block {
-            margin-bottom: 2rem;
-          }
-
-          .q-title {
-            font-size: 1.2rem;
-            color: var(--color-navy-dark);
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-bottom: 0.75rem;
-          }
-
-          .q-card {
-            background: #ffffff;
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-            font-size: 1rem;
-            line-height: 1.7;
-          }
-
-          .highlight-card {
-            background-color: var(--color-surface-alt);
-            border-right: 4px solid var(--color-teal);
-          }
-
-          [dir="ltr"] .highlight-card {
-            border-right: none;
-            border-left: 4px solid var(--color-teal);
-          }
-
-          .facility-cross-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 0.75rem;
-            padding-top: 0.75rem;
-            border-top: 1px solid var(--color-border-subtle);
-            font-size: 0.9rem;
-          }
-
-          .btn-link {
-            background: transparent;
-            border: none;
-            color: var(--color-teal);
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: underline;
-            font-family: inherit;
-          }
-
-          .sidebar-img-card {
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            border: 1px solid var(--color-border);
-            margin-bottom: 1.5rem;
-          }
-
-          .sidebar-img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-          }
-
-          .sidebar-caption {
-            background-color: var(--color-navy);
-            color: var(--color-text-on-dark-muted);
-            padding: 0.5rem;
-            font-size: 0.8rem;
-            text-align: center;
-          }
-
-          .sidebar-contact-card {
-            background-color: var(--color-surface-alt);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-          }
-
-          .sidebar-contact-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-          }
-
-          .w-100 { width: 100%; }
-
-          @media (max-width: 900px) {
-            .detail-layout-grid {
-              grid-template-columns: 1fr;
-            }
-          }
-        `}</style>
+        
       </div>
     );
   }
@@ -307,6 +168,11 @@ export const ServicesPage = () => {
   // All Services List View
   return (
     <div className="services-page">
+      <SEO 
+        title={t.services.title} 
+        description={t.services.subtitle} 
+        path="/services" 
+      />
       <section className="page-header-banner">
         <div className="container">
           <span className="badge badge-amber mb-2">{lang === 'ar' ? 'الخدمات السيادية والتجارية' : 'Sovereign & Commercial Services'}</span>
@@ -350,125 +216,7 @@ export const ServicesPage = () => {
         </div>
       </section>
 
-      <style>{`
-        .page-header-banner {
-          background-color: var(--color-navy-dark);
-          color: #ffffff;
-          padding: 3.5rem 0;
-          border-bottom: 3px solid var(--color-amber);
-        }
-
-        .page-header-banner h1 {
-          color: #ffffff;
-          font-size: 2.2rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .lead-subtitle {
-          font-size: 1.1rem;
-          color: var(--color-text-on-dark-muted);
-        }
-
-        .services-list-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 2rem;
-        }
-
-        .service-item-card {
-          background-color: #ffffff;
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-md);
-          overflow: hidden;
-          cursor: pointer;
-          transition: all var(--transition-fast);
-          display: flex;
-          flex-direction: column;
-        }
-
-        .service-item-card:hover {
-          border-color: var(--color-teal);
-        }
-
-        .card-media {
-          position: relative;
-          height: 180px;
-        }
-
-        .card-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .card-badge {
-          position: absolute;
-          top: 1rem;
-          right: 1rem;
-        }
-
-        [dir="ltr"] .card-badge {
-          right: auto;
-          left: 1rem;
-        }
-
-        .card-body {
-          padding: 1.5rem;
-          display: flex;
-          flex-direction: column;
-          flex-grow: 1;
-        }
-
-        .icon-row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: 0.85rem;
-        }
-
-        .for-who-tag {
-          font-size: 0.78rem;
-          color: var(--color-text-muted);
-          font-weight: 500;
-        }
-
-        .service-item-card h3 {
-          font-size: 1.2rem;
-          margin-bottom: 0.5rem;
-          color: var(--color-navy-dark);
-        }
-
-        .service-item-card p {
-          font-size: 0.9rem;
-          color: var(--color-text-muted);
-          line-height: 1.6;
-          margin-bottom: 1.5rem;
-          flex-grow: 1;
-        }
-
-        .card-action-bar {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          color: var(--color-teal);
-          font-weight: 600;
-          font-size: 0.88rem;
-          padding-top: 0.75rem;
-          border-top: 1px solid var(--color-border-subtle);
-        }
-
-        @media (max-width: 990px) {
-          .services-list-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-
-        @media (max-width: 650px) {
-          .services-list-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-      `}</style>
+      
     </div>
   );
 };

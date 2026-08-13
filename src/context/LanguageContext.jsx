@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { translations } from '../data/translations';
 
 const LanguageContext = createContext();
@@ -8,8 +9,8 @@ export const LanguageProvider = ({ children }) => {
     return localStorage.getItem('eaea_lang') || 'ar';
   });
 
-  const [currentRoute, setCurrentRoute] = useState('home');
-  const [activeItem, setActiveItem] = useState(null);
+  const location = useLocation();
+  const navigateRouter = useNavigate();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -23,20 +24,28 @@ export const LanguageProvider = ({ children }) => {
     localStorage.setItem('eaea_lang', lang);
   }, [lang]);
 
+  // Scroll to top on location change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
+
   const toggleLanguage = () => {
     setLang(prev => (prev === 'ar' ? 'en' : 'ar'));
   };
 
+  // Wrapper around react-router navigate to support the existing signature (route, itemId)
   const navigate = (route, itemId = null) => {
-    setCurrentRoute(route);
-    setActiveItem(itemId);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    let path = route === 'home' ? '/' : `/${route}`;
+    if (itemId) {
+      path += `/${itemId}`;
+    }
+    navigateRouter(path);
   };
 
   const t = translations[lang];
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, toggleLanguage, t, currentRoute, navigate, activeItem }}>
+    <LanguageContext.Provider value={{ lang, setLang, toggleLanguage, t, navigate, location }}>
       {children}
     </LanguageContext.Provider>
   );

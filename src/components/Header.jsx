@@ -3,7 +3,8 @@ import { useLanguage } from '../context/LanguageContext';
 import { Globe, Menu, X, PhoneCall, ShieldCheck } from 'lucide-react';
 
 export const Header = () => {
-  const { lang, toggleLanguage, t, currentRoute, navigate } = useLanguage();
+  const { lang, toggleLanguage, t, navigate, location } = useLanguage();
+  const currentRoute = location.pathname.split('/')[1] || 'home';
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
@@ -34,7 +35,7 @@ export const Header = () => {
             />
             <div className="brand-text">
               <span className="brand-title">{t.siteName}</span>
-              <span className="brand-subtitle">EAEA</span>
+              <span className="brand-subtitle desktop-only">EAEA</span>
             </div>
           </div>
 
@@ -72,14 +73,6 @@ export const Header = () => {
           {/* Mobile Actions */}
           <div className="mobile-actions">
             <button 
-              onClick={toggleLanguage} 
-              className="lang-switcher-mobile"
-              aria-label="Switch Language"
-            >
-              <Globe size={16} />
-              <span>{lang === 'ar' ? 'EN' : 'AR'}</span>
-            </button>
-            <button 
               className="mobile-trigger" 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle Navigation Menu"
@@ -104,8 +97,16 @@ export const Header = () => {
               </button>
             ))}
             <button 
+              onClick={() => { toggleLanguage(); setMobileMenuOpen(false); }}
+              className="btn btn-outline w-100 mb-2"
+              style={{ display: 'flex', justifyContent: 'center' }}
+            >
+              <Globe size={18} />
+              <span>{lang === 'ar' ? 'English (EN)' : 'عربي (AR)'}</span>
+            </button>
+            <button 
               onClick={() => handleNavClick('contact')}
-              className="btn btn-amber mobile-cta-btn"
+              className="btn btn-amber mobile-cta-btn w-100"
             >
               <PhoneCall size={18} />
               <span>{t.cta.contactUs}</span>
@@ -114,211 +115,7 @@ export const Header = () => {
         </div>
       )}
 
-      <style>{`
-        .site-header {
-          position: sticky;
-          top: 0;
-          z-index: 1000;
-          background-color: #ffffff;
-          box-shadow: 0 1px 0 rgba(15, 23, 42, 0.05);
-        }
-
-        .lang-switcher {
-          background: transparent;
-          border: none;
-          color: var(--color-text-muted);
-          padding: 0.4rem 0.5rem;
-          font-size: 0.85rem;
-          font-weight: 500;
-          cursor: pointer;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.4rem;
-          transition: color var(--transition-fast);
-          font-family: inherit;
-        }
-
-        .lang-switcher:hover {
-          color: var(--color-navy-dark);
-        }
-
-        .main-header {
-          height: var(--header-height);
-          display: flex;
-          align-items: center;
-        }
-
-        .main-header-inner {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          height: 100%;
-        }
-
-        .brand-lockup {
-          display: flex;
-          align-items: center;
-          gap: 0.85rem;
-          cursor: pointer;
-          user-select: none;
-        }
-
-        .brand-logo {
-          height: 56px;
-          width: auto;
-          object-fit: contain;
-        }
-
-        .brand-text {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-        }
-
-        .brand-title {
-          font-size: 1.15rem;
-          font-weight: 700;
-          color: var(--color-navy-dark);
-          line-height: 1.2;
-        }
-
-        .brand-subtitle {
-          font-size: 0.8rem;
-          font-weight: 600;
-          color: var(--color-text-muted);
-          line-height: 1.2;
-          margin-top: 0.2rem;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-        }
-
-        .desktop-nav {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-        }
-
-        .nav-link {
-          background: transparent;
-          border: none;
-          padding: 0.5rem 0.75rem;
-          font-size: 0.9rem;
-          font-weight: 500;
-          color: var(--color-text-muted);
-          cursor: pointer;
-          transition: color var(--transition-fast);
-          font-family: inherit;
-        }
-
-        .nav-link:hover {
-          color: var(--color-navy-dark);
-        }
-
-        .nav-link.active {
-          color: var(--color-teal-dark);
-          font-weight: 700;
-        }
-
-        .header-cta {
-          display: flex;
-          align-items: center;
-          gap: 1.5rem;
-        }
-
-        .btn-cta {
-          padding: 0.45rem 1.15rem;
-          font-size: 0.88rem;
-          border-color: var(--color-border);
-          color: var(--color-navy-dark);
-        }
-        
-        .btn-cta:hover {
-          border-color: var(--color-navy-dark);
-          background-color: var(--color-navy-dark);
-          color: #ffffff;
-        }
-
-        .mobile-actions {
-          display: none;
-          align-items: center;
-          gap: 0.5rem;
-        }
-
-        .lang-switcher-mobile {
-          background: transparent;
-          border: none;
-          color: var(--color-navy-dark);
-          padding: 0.4rem;
-          font-size: 0.85rem;
-          font-weight: 700;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          gap: 0.3rem;
-          font-family: inherit;
-        }
-
-        .mobile-trigger {
-          display: none;
-          background: transparent;
-          border: none;
-          color: var(--color-navy-dark);
-          cursor: pointer;
-          padding: 0.4rem;
-        }
-
-        .mobile-drawer {
-          background-color: #ffffff;
-          border-bottom: 2px solid var(--color-navy);
-          padding: 1.25rem 1.5rem;
-          box-shadow: var(--shadow-lg);
-        }
-
-        .mobile-nav {
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
-        .mobile-nav-link {
-          background: transparent;
-          border: none;
-          text-align: start;
-          padding: 0.75rem 1rem;
-          font-size: 1.05rem;
-          font-weight: 500;
-          color: var(--color-navy-dark);
-          border-radius: var(--radius-sm);
-          font-family: inherit;
-          cursor: pointer;
-        }
-
-        .mobile-nav-link.active {
-          background-color: var(--color-teal-light);
-          color: var(--color-teal-dark);
-          font-weight: 700;
-        }
-
-        .mobile-cta-btn {
-          margin-top: 0.5rem;
-          width: 100%;
-        }
-
-        @media (max-width: 1024px) {
-          .desktop-nav, .header-cta {
-            display: none;
-          }
-          .mobile-trigger, .mobile-actions {
-            display: flex;
-          }
-          .brand-title {
-            font-size: 1rem;
-          }
-          .brand-logo {
-            height: 44px;
-          }
-        }
-      `}</style>
+      
     </header>
   );
 };
