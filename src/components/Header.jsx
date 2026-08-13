@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { Globe, Menu, X, PhoneCall, ShieldCheck } from 'lucide-react';
 
@@ -6,6 +7,11 @@ export const Header = () => {
   const { lang, toggleLanguage, t, navigate, location } = useLanguage();
   const currentRoute = location.pathname.split('/')[1] || 'home';
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close mobile drawer automatically when route changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const navItems = [
     { id: 'home', label: t.nav.home },
@@ -16,18 +22,13 @@ export const Header = () => {
     { id: 'news', label: t.nav.news }
   ];
 
-  const handleNavClick = (id) => {
-    navigate(id);
-    setMobileMenuOpen(false);
-  };
-
   return (
     <header className="site-header">
       {/* Main Header Bar */}
       <div className="main-header">
         <div className="container main-header-inner">
           {/* Logo & Identity */}
-          <div className="brand-lockup" onClick={() => handleNavClick('home')}>
+          <Link to="/" className="brand-lockup">
             <img 
               src="/images/EAEA_Logo.png" 
               alt={lang === 'ar' ? 'شعار هيئة الطاقة الذرية المصرية' : 'EAEA Official Logo'} 
@@ -37,18 +38,18 @@ export const Header = () => {
               <span className="brand-title">{t.siteName}</span>
               <span className="brand-subtitle desktop-only">EAEA</span>
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation Tree */}
           <nav className="desktop-nav" aria-label="Main Navigation">
             {navItems.map(item => (
-              <button
+              <NavLink
                 key={item.id}
-                onClick={() => handleNavClick(item.id)}
-                className={`nav-link ${currentRoute === item.id ? 'active' : ''}`}
+                to={item.id === 'home' ? '/' : `/${item.id}`}
+                className={({ isActive }) => `nav-link ${isActive || currentRoute === item.id ? 'active' : ''}`}
               >
                 {item.label}
-              </button>
+              </NavLink>
             ))}
           </nav>
 
@@ -62,12 +63,12 @@ export const Header = () => {
               <Globe size={15} />
               <span>{lang === 'ar' ? 'English' : 'عربي'}</span>
             </button>
-            <button 
-              onClick={() => handleNavClick('contact')} 
+            <Link 
+              to="/contact" 
               className="btn btn-outline btn-cta"
             >
               <span>{t.cta.contactUs}</span>
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Actions */}
@@ -88,29 +89,30 @@ export const Header = () => {
         <div className="mobile-drawer">
           <nav className="mobile-nav">
             {navItems.map(item => (
-              <button
+              <NavLink
                 key={item.id}
-                onClick={() => handleNavClick(item.id)}
-                className={`mobile-nav-link ${currentRoute === item.id ? 'active' : ''}`}
+                to={item.id === 'home' ? '/' : `/${item.id}`}
+                className={({ isActive }) => `mobile-nav-link ${isActive || currentRoute === item.id ? 'active' : ''}`}
               >
                 {item.label}
-              </button>
+              </NavLink>
             ))}
             <button 
-              onClick={() => { toggleLanguage(); setMobileMenuOpen(false); }}
+              onClick={() => toggleLanguage()}
               className="btn btn-outline w-100 mb-2"
               style={{ display: 'flex', justifyContent: 'center' }}
             >
               <Globe size={18} />
               <span>{lang === 'ar' ? 'English (EN)' : 'عربي (AR)'}</span>
             </button>
-            <button 
-              onClick={() => handleNavClick('contact')}
+            <Link 
+              to="/contact"
               className="btn btn-amber mobile-cta-btn w-100"
+              style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem' }}
             >
               <PhoneCall size={18} />
               <span>{t.cta.contactUs}</span>
-            </button>
+            </Link>
           </nav>
         </div>
       )}

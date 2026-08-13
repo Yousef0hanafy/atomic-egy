@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { ShieldCheck, MapPin, Mail, Phone, ExternalLink } from 'lucide-react';
 
@@ -35,13 +36,13 @@ export const Footer = () => {
           <div className="footer-col">
             <h4 className="footer-heading">{lang === 'ar' ? 'أقسام الموقع' : 'Navigation'}</h4>
             <ul className="footer-links">
-              <li><button onClick={() => navigate('home')}>{t.nav.home}</button></li>
-              <li><button onClick={() => navigate('about')}>{t.nav.about}</button></li>
-              <li><button onClick={() => navigate('services')}>{t.nav.services}</button></li>
-              <li><button onClick={() => navigate('capabilities')}>{t.nav.capabilities}</button></li>
-              <li><button onClick={() => navigate('research')}>{t.nav.research}</button></li>
-              <li><button onClick={() => navigate('news')}>{t.nav.news}</button></li>
-              <li><button onClick={() => navigate('contact')}>{t.nav.contact}</button></li>
+              <li><Link to="/">{t.nav.home}</Link></li>
+              <li><Link to="/about">{t.nav.about}</Link></li>
+              <li><Link to="/services">{t.nav.services}</Link></li>
+              <li><Link to="/capabilities">{t.nav.capabilities}</Link></li>
+              <li><Link to="/research">{t.nav.research}</Link></li>
+              <li><Link to="/news">{t.nav.news}</Link></li>
+              <li><Link to="/contact">{t.nav.contact}</Link></li>
             </ul>
           </div>
 
@@ -49,10 +50,10 @@ export const Footer = () => {
           <div className="footer-col">
             <h4 className="footer-heading">{lang === 'ar' ? 'الخدمات والمراكز' : 'Services & Centers'}</h4>
             <ul className="footer-links">
-              <li><button onClick={() => navigate('services', 'medical-isotopes')}>{t.services.items[0].title}</button></li>
-              <li><button onClick={() => navigate('services', 'industrial-irradiation')}>{t.services.items[1].title}</button></li>
-              <li><button onClick={() => navigate('services', 'customs-screening')}>{t.services.items[2].title}</button></li>
-              <li><button onClick={() => navigate('services', 'waste-management')}>{t.services.items[3].title}</button></li>
+              <li><Link to="/services/medical-isotopes">{t.services.items[0].title}</Link></li>
+              <li><Link to="/services/industrial-irradiation">{t.services.items[1].title}</Link></li>
+              <li><Link to="/services/customs-screening">{t.services.items[2].title}</Link></li>
+              <li><Link to="/services/waste-management">{t.services.items[3].title}</Link></li>
               <li className="link-divider"></li>
               <li className="footer-center-tag">NRC (أنشاص) · NCRRT (مدينة نصر)</li>
               <li className="footer-center-tag">HLWMC (أنشاص) · NCNSRC (مدينة نصر)</li>
