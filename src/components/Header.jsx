@@ -92,6 +92,7 @@ export const Header = () => {
               <NavLink
                 key={item.id}
                 to={item.id === 'home' ? '/' : `/${item.id}`}
+                onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) => `mobile-nav-link ${isActive || currentRoute === item.id ? 'active' : ''}`}
               >
                 {item.label}
@@ -107,6 +108,7 @@ export const Header = () => {
             </button>
             <Link 
               to="/contact"
+              onClick={() => setMobileMenuOpen(false)}
               className="btn btn-amber mobile-cta-btn w-100"
               style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem' }}
             >

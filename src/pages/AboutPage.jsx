@@ -2,16 +2,10 @@ import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { TrustStrip } from '../components/TrustStrip';
 import { 
-  Building2, 
-  Target, 
-  Eye, 
-  History, 
   ShieldCheck, 
-  Users,
-  Award,
   CheckCircle2, 
-  MapPin, 
-  FileText
+  UserCheck, 
+  MapPin 
 } from 'lucide-react';
 import { SEO } from '../components/SEO';
 

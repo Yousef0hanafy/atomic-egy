@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { LanguageProvider } from './context/LanguageContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
@@ -28,7 +29,8 @@ const AppContent = () => {
     <div className="app-root">
       <Header />
       <main className="main-content">
-        <Routes>
+        <ErrorBoundary>
+          <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           
@@ -48,6 +50,7 @@ const AppContent = () => {
           {/* Catch-all 404 */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        </ErrorBoundary>
       </main>
       <Footer />
     </div>
