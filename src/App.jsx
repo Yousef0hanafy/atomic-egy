@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { LanguageProvider } from './context/LanguageContext';
 import { Header } from './components/Header';
@@ -18,9 +18,9 @@ const NotFoundPage = () => (
   <div style={{ padding: '5rem 0', textAlign: 'center', minHeight: '50vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
     <h1 style={{ fontSize: '4rem', color: 'var(--color-navy-dark)', marginBottom: '1rem' }}>404</h1>
     <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)' }}>Page not found / الصفحة غير موجودة</p>
-    <a href="/" className="btn btn-primary" style={{ marginTop: '2rem' }}>
+    <Link to="/" className="btn btn-primary" style={{ marginTop: '2rem' }}>
       Return Home / العودة للرئيسية
-    </a>
+    </Link>
   </div>
 );
 
